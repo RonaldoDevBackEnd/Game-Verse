@@ -114,12 +114,17 @@
       <div class="gv-intro-skip-bar">
         <button id="gvIntroAudioToggle" class="gv-skip-btn sound-btn" aria-label="Ativar ou desativar áudio">
           <span class="icon">${audio.muted ? '🔇' : '🔊'}</span>
-          <span class="label">${audio.muted ? 'Mudo' : 'Som'}</span>
+          <span class="label">${audio.muted ? 'Som desligado' : 'Som ativado'}</span>
         </button>
         <button id="gvIntroSkipBtn" class="gv-skip-btn" aria-label="Pular introdução">
           <span>Pular</span>
           <kbd>ESC</kbd>
         </button>
+      </div>
+
+      <!-- Aviso Interativo para Desbloquear Áudio (Autoplay Policy) -->
+      <div class="gv-audio-hint" id="gvAudioHint">
+        <span>🔊 Toque em qualquer lugar para ouvir o som do console</span>
       </div>
 
       <!-- Palco Central Cinematográfico -->
@@ -309,9 +314,29 @@
     // Duração total da cinematic: 2.8s
     const timer = setTimeout(finish, 2800);
 
+    // Desbloqueio e tratamento do áudio (Autoplay Policy do navegador)
+    const hint = $('#gvAudioHint', overlay);
+
+    const unlockAudio = () => {
+      audio.init();
+      if (audio.ctx && audio.ctx.state === 'running') {
+        if (hint) hint.style.display = 'none';
+      }
+    };
+
+    window.addEventListener('pointerdown', unlockAudio, { once: true });
+    window.addEventListener('keydown', unlockAudio, { once: true });
+
+    // Se o áudio estiver bloqueado pelo navegador, exibe a dica amigável
+    setTimeout(() => {
+      if (audio.ctx && audio.ctx.state === 'suspended' && hint) {
+        hint.classList.add('visible');
+      }
+    }, 400);
+
     // Eventos para pular (ESC, Espaço, Enter ou clique no botão/overlay)
     const onKey = (e) => {
-      if (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter') {
+      if (e.key === 'Escape') {
         clearTimeout(timer);
         window.removeEventListener('keydown', onKey);
         finish();
@@ -328,15 +353,16 @@
       });
     }
 
-    // Clique na tela ativa o áudio caso o navegador tenha bloqueado, ou pula se o usuário quiser
+    // Clique na tela ativa o som instantaneamente se estiver suspenso
     overlay.addEventListener('click', (e) => {
       if (e.target.closest('#gvIntroAudioToggle')) return;
       if (e.target.closest('#gvIntroSkipBtn')) return;
-      // Destrava áudio caso não tenha iniciado
-      audio.init();
-      // Pula instantaneamente
-      clearTimeout(timer);
-      finish();
+
+      if (audio.ctx && audio.ctx.state === 'suspended') {
+        audio.init();
+        audio.playBootSequence();
+        if (hint) hint.style.display = 'none';
+      }
     });
 
     // Botão de Mudo / Som
@@ -348,8 +374,12 @@
         const icon = $('.icon', audioBtn);
         const label = $('.label', audioBtn);
         if (icon) icon.textContent = isMuted ? '🔇' : '🔊';
-        if (label) label.textContent = isMuted ? 'Mudo' : 'Som';
-        if (!isMuted) audio.playBootSequence();
+        if (label) label.textContent = isMuted ? 'Som desligado' : 'Som ativado';
+        if (!isMuted) {
+          audio.init();
+          audio.playBootSequence();
+          if (hint) hint.style.display = 'none';
+        }
       });
     }
   }

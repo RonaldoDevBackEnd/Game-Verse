@@ -4,10 +4,13 @@
 
 **Plataforma de E-Commerce de Alta Performance para Setup, Hardware & Periféricos Gamer**
 
+[![Acesse Online](https://img.shields.io/badge/Acesse%20Online-GitHub%20Pages-00e5ff?style=for-the-badge&logo=github&logoColor=white)](https://ronaldodevbackend.github.io/Game-Verse/)
 [![Versão](https://img.shields.io/badge/versão-v1.0.0-7c4dff.svg?style=for-the-badge)](https://github.com/RonaldoDevBackEnd/Game-Verse)
 [![JavaScript](https://img.shields.io/badge/JavaScript-Vanilla%20ES6+-00e5ff.svg?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 [![CSS3](https://img.shields.io/badge/CSS3-Cyberpunk%20Dark-7c4dff.svg?style=for-the-badge&logo=css3&logoColor=white)](https://www.w3.org/Style/CSS/)
 [![HTML5](https://img.shields.io/badge/HTML5-Semântico-00e676.svg?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/pt-BR/docs/Web/HTML)
+
+👉 **Deploy Oficial**: [https://ronaldodevbackend.github.io/Game-Verse/](https://ronaldodevbackend.github.io/Game-Verse/)
 
 </div>
 
