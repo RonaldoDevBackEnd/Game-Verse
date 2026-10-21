@@ -201,14 +201,18 @@ header {
 
 /* Price Range Slider */
 .price-filter-group {
-  background: var(--card); padding: 6px 14px; border-radius: 10px;
+  background: var(--card); padding: 7px 14px; border-radius: 10px;
   border: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+}
+.price-label-row {
+  display: flex; align-items: center; gap: 6px; white-space: nowrap;
 }
 .price-filter-group strong { color: var(--neon-2); font-weight: 700; min-width: 75px; display: inline-block; }
 .price-filter-group input[type="range"] {
   accent-color: var(--neon-2);
   cursor: pointer;
-  width: 110px;
+  width: 120px;
 }
 
 /* ===== Categories ===== */
@@ -905,9 +909,9 @@ footer { border-top: 1px solid var(--border); margin-top: 40px; padding: 30px 0;
 }
 
 @media (max-width: 768px) {
-  .catalog-header { flex-direction: column; align-items: flex-start; gap: 14px; }
-  .catalog-controls { width: 100%; justify-content: space-between; }
-  .control-group { flex: 1; min-width: 140px; }
+  .catalog-header { flex-direction: column; align-items: stretch; gap: 14px; }
+  .catalog-controls { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .control-group { width: 100%; }
   .custom-select { width: 100%; }
   .hero h1 { font-size: 2.1rem; }
   .hero p { font-size: 1rem; }
@@ -930,9 +934,78 @@ footer { border-top: 1px solid var(--border); margin-top: 40px; padding: 30px 0;
   .hero p { font-size: .92rem; margin-bottom: 20px; }
   .hero .cta { width: 100%; padding: 13px; }
   
-  .catalog-controls { gap: 10px; }
-  .price-filter-group { width: 100%; display: flex; justify-content: space-between; align-items: center; }
-  .price-filter-group input[type="range"] { flex: 1; margin: 0 10px; width: auto; }
+  /* Controles do Catálogo 100% responsivos no celular */
+  .catalog-controls {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .sort-group {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 14px;
+    box-sizing: border-box;
+  }
+  .sort-group label {
+    white-space: nowrap;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--muted);
+  }
+  .sort-group .custom-select {
+    flex: 1;
+    max-width: 62%;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .price-filter-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    box-sizing: border-box;
+  }
+  .price-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 0.88rem;
+  }
+  .price-label-row label {
+    color: var(--muted);
+    font-weight: 700;
+  }
+  .price-label-row strong {
+    color: var(--neon-2);
+    font-size: 0.98rem;
+    font-weight: 800;
+  }
+  .price-filter-group input[type="range"] {
+    width: 100%;
+    margin: 4px 0 0 0;
+    height: 6px;
+    accent-color: var(--neon-2);
+    cursor: pointer;
+  }
   
   .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .card .body { padding: 12px; }

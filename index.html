@@ -53,7 +53,7 @@
       </div>
 
       <div class="catalog-controls">
-        <div class="control-group">
+        <div class="control-group sort-group">
           <label for="sortSelect">Ordenar por:</label>
           <select id="sortSelect" class="custom-select" aria-label="Ordenar produtos por preço ou avaliação">
             <option value="featured">✨ Destaques</option>
@@ -64,7 +64,10 @@
         </div>
 
         <div class="control-group price-filter-group">
-          <label for="priceRange">Preço até: <strong id="priceVal">R$ 4.000</strong></label>
+          <div class="price-label-row">
+            <label for="priceRange">Preço até:</label>
+            <strong id="priceVal">R$ 4.000</strong>
+          </div>
           <input type="range" id="priceRange" min="80" max="4000" step="50" value="4000" aria-label="Filtrar por preço máximo">
         </div>
       </div>
